@@ -1,0 +1,147 @@
+<!--
+    From scratch page about my projects!
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Scrape Project!</title>
+    <link rel="stylesheet" href="./css/style1.css">
+  </head>
+
+  <a href="index.html">Home Page</a>
+  <a href="#video">Go to Video </a>
+
+  <a id="top"></a>
+  <body class="center">
+    <h1>Welcome to the page about my webscraping project!</h1>
+    <p>
+      Here I'll show case how I webscrapped the top 207 self-help books from
+      Amazon's website!
+      <br />
+      <br />
+      I read my first self-improvement book in the summer of 2022. The book is
+      called Greenlights by Matthew McConaughey and since then, I’ve been hooked
+      on learning the little tricks that helped people be successful in their
+      life. If you’re feeling stuck, lost, or unsure of how to improve your
+      life, reading a self-help book can be a game-changer. I know firsthand how
+      valuable the insights and guidance in these books can be. They offer
+      practical tools, actionable steps, and uplifting messages to help you
+      shift your mindset, overcome obstacles, and create the life you want.
+      Whether you’re looking to improve your relationships, boost your
+      confidence, or find more purpose and fulfillment, there’s a self-help book
+      out there that can help you on your journey. So don’t hesitate to pick one
+      up and give it a chance - it could be just the inspiration you need to
+      take your life to the next level!
+    </p>
+    <br />
+    <h1>Part 1: Getting the Data</h1>
+    <p>
+      The first thing I did was navigate to the where all the products are
+      listed on a page. Each page displays around 15 products so the important
+      thing is to find the page that lets you navigate to all the available
+      pages. You’ll know you on the right page when it looks like the images
+      below.
+    <div class="container">
+        <img src="./assets/img/amazon.png" alt="amazon" />
+    </div>
+
+    <div>
+      <img src="./assets/img/pages.jpg" alt="pages" />
+    </div>
+      When you find the correct page you want to save all the html code into a
+      file. This can easily be done by pressing Ctrl+ ‘+’ + s. With all the HTML
+      code for that page saved it’s time to move on to the coding!
+    </p>
+    <h1>Scraping the Page</h1>
+    <p>
+      Below is all the code I used to scrape the title, number of reviews,
+      rating,price and image link. Once you download and save the html code for
+      the site make sure you save it as 'index.html'. In the code below the with
+      open statement contains index.html so make sure its saved as that name.
+      <br />
+      <img src="./assets/img/code.png" alt="code" />
+      <br />
+      The first step was finding the class that contained the info for each
+      product. Once i found what the name of the class was called, I searched
+      for the variables I was interested within that class. I executed this code
+      many times after I saved the next page of products as the index file.
+      Every time I moved from product page one to product page two I edited one
+      of the last lines of the work.py file and added ‘data2.json’. When i got
+      to the 13 page of the product the bottom line read ‘data13.json’.
+    </p>
+    <h1>Reading and Cleaning the Data</h1>
+
+      After running the code above many times, I ended up with 13 json files of
+      data!
+      <img src="./assets/img/jsons.png" alt="json" />
+      The next step was to get the data from each of these files and add them a
+      dataframe. Luckily this part was much more straight forward! The hardest
+      part was finding out how to read all the json files in one location.
+      <br>
+      <br>
+      <code class="mycode">
+        import os import pandas as pd # Set the directory containing the JSON
+        files directory = 'C:/Users/tinom/Downloads/' # Get a list of all JSON
+        files in the directory json_files = [f for f in os.listdir(directory) if
+        f.endswith('.json')] # Read each JSON file into a Pandas DataFrame dfs =
+        [] for json_file in json_files: filepath = os.path.join(directory,
+        json_file) df = pd.read_json(filepath) dfs.append(df) # Concatenate the
+        DataFrames into a single DataFrame merged_df = pd.concat(dfs,
+        ignore_index=True)
+      </code>
+      <br>
+      <br>
+  
+
+    <h1>Final Touches</h1>
+      After I read them all into the merged_df it was time for the fun part!
+      Cleaing and getting the data ready for analysis. This involved converting
+      the numeric variables into numeric types instead of strings.
+      <br>
+      <br>
+      <code>
+        # create a new column called "rating_value" merged_df['rating_value'] =
+        merged_df['rating'].apply(lambda x: float(x.split()[0]))
+        merged_df.drop('rating', axis=1, inplace=True) merged_df['review'] =
+        merged_df['review'].str.replace(r'[\(\)]', '') original_columns =
+        merged_df.columns.tolist() new_col =
+        ['title','review','price','rating_value','link'] new_df =
+        merged_df.reindex(columns=new_col) new_df.to_csv("self-help books",index
+        = False)
+      </code>
+      <br>
+      <br>
+      After finding, scraping and cleaning the data my table came out like this!
+      <br />
+      <img src="./assets/img/table.png" alt="table" />
+      <br />
+      Now that I have data that can be manipulated I’m ready to conduct
+      exploratory data analysis and find correlations and trends in the data! If
+      you're unfamiliar with waht EDA is check out this video to get a brief
+      overview!
+      <br>
+      <br>
+      <h1 id="video"</h1>
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/QiqZliDXCCg"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      ></iframe>
+
+        <br>
+      <a href="#top">Back to Top</a>
+      <br>
+      <br>
+      <br>
+      <br>
+      <div class='tableauPlaceholder' 
+      id='viz1681858276846' style='position: relative'><noscript><a href='#'><img alt='Is Your County Obese?                            Select your county to see how it compares with other counties in the country                         ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;TT&#47;TTFFRN84H&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='path' value='shared&#47;TTFFRN84H' /> <param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;TT&#47;TTFFRN84H&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1681858276846');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} else { vizElement.style.width='100%';vizElement.style.height='827px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+  </body>
+</html>
