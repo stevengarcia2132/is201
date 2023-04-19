@@ -1,5 +1,5 @@
 <!--
-    From scratch page about my projects!
+    From scratch page about my project!
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -15,13 +15,52 @@
   <a href="#video">Go to Video </a>
 
   <a id="top"></a>
-  <body class="center">
-    <h1>Welcome to the page about my webscraping project!</h1>
+  <body>
+
+  <div class="center">
+    <h1>Welcome to the page about my webscraping project! </h1>
+  </div>
+  <p>    
+    Here I'll show case how I webscrapped the top 207 self-help books from
+    Amazon's website! This page is broken into five parts:
+  </p>
+
+
+    <div class="numbered-list">
+      <ol>
+        <li>Introduction
+          <ul>
+            <li>This explains the inspiration and why I chose to this data set. </li>
+          </ul>
+        </li>
+        <li>Getting the Data
+          <ul>
+            <li>See the correct type of webpage that Is required to replicate this procedue</li>
+          </ul>
+        </li>
+        <li>Scraping the Page
+          <ul>
+            <li>Learn the web scraping technique I used to go through the html code.</li>
+          </ul>
+        </li>
+        <li>Reading and Cleaning the Data
+          <ul>
+            <li>After collecting all the data from each html file I joined that data and made a data frame </li>
+          </ul>
+        </li>
+        <li>Final Touches
+          <ul>
+            <li>Learn how I took the data frame and cleaned it up so that It was ready for analysis.  </li>
+          </ul>
+        </li>
+      </ol>
+  </div>
+  <div class="center">
+    <h1>Introduction</h1>
+  </div>
+  
+  <div class="paragraph1">
     <p>
-      Here I'll show case how I webscrapped the top 207 self-help books from
-      Amazon's website!
-      <br />
-      <br />
       I read my first self-improvement book in the summer of 2022. The book is
       called Greenlights by Matthew McConaughey and since then, I’ve been hooked
       on learning the little tricks that helped people be successful in their
@@ -36,27 +75,43 @@
       up and give it a chance - it could be just the inspiration you need to
       take your life to the next level!
     </p>
+  </div>
+
+
     <br />
-    <h1>Part 1: Getting the Data</h1>
-    <p>
-      The first thing I did was navigate to the where all the products are
-      listed on a page. Each page displays around 15 products so the important
-      thing is to find the page that lets you navigate to all the available
-      pages. You’ll know you on the right page when it looks like the images
-      below.
+    <div class="center">
+    <h1>Part 2: Getting the Data</h1>
+
+    </div>
+
+    <div class="paragraph2">
+      <p>
+        The first thing I did was navigate to the where all the products are
+        listed on a page. Each page displays around 15 products so the important
+        thing is to find the page that lets you navigate to all the available
+        pages. You’ll know you on the right page when it looks like the images
+        below.
+      </p>
+    </div>
+
     <div class="container">
         <img src="./assets/img/amazon.png" alt="amazon" />
     </div>
-
+    <br>
     <div>
       <img src="./assets/img/pages.jpg" alt="pages" />
     </div>
-      When you find the correct page you want to save all the html code into a
-      file. This can easily be done by pressing Ctrl+ ‘+’ + s. With all the HTML
-      code for that page saved it’s time to move on to the coding!
-    </p>
-    <h1>Scraping the Page</h1>
-    <p>
+    <br>
+      <div class="paragraph1">
+        When you find the correct page you want to save all the html code into a
+        file. This can easily be done by pressing Ctrl+ ‘+’ + s. With all the HTML
+        code for that page saved it’s time to move on to the coding!
+      </div>
+    <div class="center">
+      <h1>Part 3: Scraping the Page</h1>
+    </div>
+    <br>
+    <div class="paragraph1">
       Below is all the code I used to scrape the title, number of reviews,
       rating,price and image link. Once you download and save the html code for
       the site make sure you save it as 'index.html'. In the code below the with
@@ -72,56 +127,104 @@
       of the last lines of the work.py file and added ‘data2.json’. When i got
       to the 13 page of the product the bottom line read ‘data13.json’.
     </p>
-    <h1>Reading and Cleaning the Data</h1>
 
-      After running the code above many times, I ended up with 13 json files of
-      data!
+  </div>
+
+  <div class="center">
+    <h1>Part 4: Reading and Cleaning the Data</h1>
+  </div>
+  <br>
+
+  <div class="paragraph1">
+    After running the code above many times, I ended up with 13 json files of
+    data!
+  </div>
+
+      <br>
       <img src="./assets/img/jsons.png" alt="json" />
-      The next step was to get the data from each of these files and add them a
-      dataframe. Luckily this part was much more straight forward! The hardest
-      part was finding out how to read all the json files in one location.
+      <br>
+
+      <div class="paragraph1">
+        The next step was to get the data from each of these files and add them a
+        dataframe. Luckily this part was much more straight forward! The hardest
+        part was finding out how to read all the json files in one location. Check out the code below to see 
+        how i did it
+      </div>
       <br>
       <br>
       <code class="mycode">
-        import os import pandas as pd # Set the directory containing the JSON
-        files directory = 'C:/Users/tinom/Downloads/' # Get a list of all JSON
+        CODE
+        <br>
+        import os import pandas as pd
+        <br>
+        # Set the directory containing the JSON
+        <br>
+        files directory = 'C:/Users/tinom/Downloads/' 
+        <br>
+         # Get a list of all JSON
+         <br>
         files in the directory json_files = [f for f in os.listdir(directory) if
-        f.endswith('.json')] # Read each JSON file into a Pandas DataFrame dfs =
-        [] for json_file in json_files: filepath = os.path.join(directory,
-        json_file) df = pd.read_json(filepath) dfs.append(df) # Concatenate the
-        DataFrames into a single DataFrame merged_df = pd.concat(dfs,
+        f.endswith('.json')] 
+        <br>
+        # Read each JSON file into a Pandas DataFrame
+        <br>
+        dfs = [] for json_file in json_files: filepath = os.path.join(directory,
+        json_file) df = pd.read_json(filepath) dfs.append(df) 
+        <br>
+        # Concatenate the DataFrames into a single DataFrame 
+        <br>
+        merged_df = pd.concat(dfs,
         ignore_index=True)
       </code>
       <br>
       <br>
+  </div>
   
+  <div class="center">
+    <h1>Part 5: Final Touches</h1>
 
-    <h1>Final Touches</h1>
+  </div>
+
+  <div class="paragraph1">
       After I read them all into the merged_df it was time for the fun part!
       Cleaing and getting the data ready for analysis. This involved converting
       the numeric variables into numeric types instead of strings.
+  </div>
       <br>
       <br>
-      <code>
-        # create a new column called "rating_value" merged_df['rating_value'] =
-        merged_df['rating'].apply(lambda x: float(x.split()[0]))
-        merged_df.drop('rating', axis=1, inplace=True) merged_df['review'] =
-        merged_df['review'].str.replace(r'[\(\)]', '') original_columns =
-        merged_df.columns.tolist() new_col =
-        ['title','review','price','rating_value','link'] new_df =
-        merged_df.reindex(columns=new_col) new_df.to_csv("self-help books",index
-        = False)
+      <code class="mycode">
+        CODE
+        <br>
+        # create a new column called "rating_value" 
+        <br>
+        merged_df['rating_value'] = merged_df['rating'].apply(lambda x: float(x.split()[0]))
+        <br>
+        merged_df.drop('rating', axis=1, inplace=True) 
+        <br>
+        merged_df['review'] = merged_df['review'].str.replace(r'[\(\)]', '') 
+        <br>
+        original_columns = merged_df.columns.tolist() 
+        <br>
+        new_col = ['title','review','price','rating_value','link']
+        <br>
+        new_df = merged_df.reindex(columns=new_col) 
+        <br>
+        new_df.to_csv("self-help books",index = False)
       </code>
       <br>
       <br>
-      After finding, scraping and cleaning the data my table came out like this!
+      <div class="paragraph1">
+        After finding, scraping and cleaning the data my table came out like this!
+      </div>
       <br />
       <img src="./assets/img/table.png" alt="table" />
       <br />
-      Now that I have data that can be manipulated I’m ready to conduct
-      exploratory data analysis and find correlations and trends in the data! If
-      you're unfamiliar with waht EDA is check out this video to get a brief
-      overview!
+      <div class="paragraph1">
+        Now that I have data that can be manipulated I’m ready to conduct
+        exploratory data analysis and find correlations and trends in the data! If
+        you're unfamiliar with waht EDA is check out this video to get a brief
+        overview!
+      </div>
       <br>
       <br>
       <h1 id="video"</h1>
@@ -141,6 +244,9 @@
       <br>
       <br>
       <br>
+      <p>
+        Here is a tableau dashboard about obesity in the United States
+      </p>
       <div class='tableauPlaceholder' 
       id='viz1681858276846' style='position: relative'><noscript><a href='#'><img alt='Is Your County Obese?                            Select your county to see how it compares with other counties in the country                         ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;TT&#47;TTFFRN84H&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='path' value='shared&#47;TTFFRN84H' /> <param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;TT&#47;TTFFRN84H&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1681858276846');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} else { vizElement.style.width='100%';vizElement.style.height='827px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
   </body>
